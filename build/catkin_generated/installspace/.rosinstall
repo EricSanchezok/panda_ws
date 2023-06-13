@@ -1,2 +1,2 @@
 - setup-file:
-    local-name: /home/ericsanchez/ros/ros1/panda_ws/install/setup.sh
+    local-name: /usr/local/setup.sh
