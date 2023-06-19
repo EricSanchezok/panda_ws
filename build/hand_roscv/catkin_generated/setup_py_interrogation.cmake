@@ -1,0 +1,7 @@
+set(hand_roscv_SETUP_PY_SETUP_MODULE "distutils.core")
+set(hand_roscv_SETUP_PY_VERSION "0.0.0")
+set(hand_roscv_SETUP_PY_SCRIPTS "")
+set(hand_roscv_SETUP_PY_PACKAGES "hand_roscv")
+set(hand_roscv_SETUP_PY_PACKAGE_DIRS "src/hand_roscv")
+set(hand_roscv_SETUP_PY_MODULES "")
+set(hand_roscv_SETUP_PY_MODULE_DIRS "")

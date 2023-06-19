@@ -7,3 +7,4 @@
 subdirs("gtest")
 subdirs("panda_moveit_config")
 subdirs("panda_control")
+subdirs("hand_roscv")

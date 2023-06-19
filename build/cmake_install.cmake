@@ -133,6 +133,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/ericsanchez/ros/ros1/panda_ws/build/gtest/cmake_install.cmake")
   include("/home/ericsanchez/ros/ros1/panda_ws/build/panda_moveit_config/cmake_install.cmake")
   include("/home/ericsanchez/ros/ros1/panda_ws/build/panda_control/cmake_install.cmake")
+  include("/home/ericsanchez/ros/ros1/panda_ws/build/hand_roscv/cmake_install.cmake")
 
 endif()
 

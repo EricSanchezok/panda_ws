@@ -60,3 +60,11 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/panda_control" TYPE PROGRAM FILES "/home/ericsanchez/ros/ros1/panda_ws/build/panda_control/catkin_generated/installspace/panda_pose_control.py")
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/panda_control" TYPE PROGRAM FILES "/home/ericsanchez/ros/ros1/panda_ws/build/panda_control/catkin_generated/installspace/keyboard_pub.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/panda_control" TYPE PROGRAM FILES "/home/ericsanchez/ros/ros1/panda_ws/build/panda_control/catkin_generated/installspace/panda_hand_moveit.py")
+endif()
+
