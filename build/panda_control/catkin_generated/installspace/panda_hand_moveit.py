@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import rospy, sys
@@ -32,6 +32,8 @@ class panda_moveit:
       
         # 初始化需要使用move group控制的机械臂中的arm group
         self.arm = MoveGroupCommander('panda_arm')
+        self.robot = moveit_commander.RobotCommander()
+
         # 当运动规划失败后，允许重新规划
         self.arm.allow_replanning(True)
         
@@ -43,8 +45,9 @@ class panda_moveit:
         self.arm.set_goal_orientation_tolerance(0.001)
 
         # 设置允许的最大速度和加速度
-        self.arm.set_max_acceleration_scaling_factor(0.9)
-        self.arm.set_max_velocity_scaling_factor(0.9)
+        self.arm.set_max_acceleration_scaling_factor(1.0)
+        self.arm.set_max_velocity_scaling_factor(1.0)
+
         
         # 获取终端link的名称
         self.end_effector_link = self.arm.get_end_effector_link()
@@ -102,7 +105,7 @@ def main():
             panda.control_value = panda.clt.call(num)
 
 
-            if panda.last_task != panda.control_value.task:
+            if panda.last_task != panda.control_value.task or is_zero(panda.control_value) == True:
                 panda.task_init = False
 
             if panda.control_value.task == "position" and is_zero(panda.control_value) == False:
@@ -127,9 +130,9 @@ def main():
                                     (target_pose.position.y - start_pose.position.y) * (target_pose.position.y - start_pose.position.y) +
                                     (target_pose.position.z - start_pose.position.z) * (target_pose.position.z - start_pose.position.z))
                 
-                print("distance: ", distance)
-                print("初始位置:", panda.task_start_control_value)
-                print("当前位置：", panda.control_value)
+                # print("distance: ", distance)
+                # print("初始位置:", panda.task_start_control_value)
+                # print("当前位置：", panda.control_value)
 
                 if distance < 0.001:
                     continue
@@ -148,6 +151,8 @@ def main():
                 
                 # 设置机器臂当前的状态作为运动初始状态
                 panda.arm.set_start_state_to_current_state()
+                # 设置执行时间限制为1秒
+                panda.arm.set_planning_time(0.1)
             
                 # 尝试规划一条笛卡尔空间下的路径，依次通过所有路点
                 while fraction < 1.0 and attempts < maxtries:
@@ -159,18 +164,22 @@ def main():
                     
                     # 尝试次数累加
                     attempts += 1
+
+                time_middle = time.time()
                                 
                 # 如果路径规划成功（覆盖率100%）,则开始控制机械臂运动
                 if fraction == 1.0:
-                    # 设置执行时间限制为0.5s
-                    panda.arm.set_planning_time(0.05)
-                    panda.arm.execute(plan)
+                    plan = panda.arm.retime_trajectory(panda.robot.get_current_state(), plan, 0.1)
+                    print("----------------规划组------------------")
+                    print(plan)
+                    print("规划距离:", distance, "规划点数量:", len(plan.joint_trajectory.points))
+                    panda.arm.execute(plan, wait=True)
                 # 如果路径规划失败，则打印失败信息
                 else:
                     rospy.loginfo("Path planning failed with only " + str(fraction) + " success after " + str(maxtries) + " attempts.")  
 
                 time_end = time.time()
-                print("time: ", time_end - time_start)
+                print("time_middle: ", time_middle - time_start, "time_end: ", time_end - time_start)
 
             if panda.control_value.task == "return":
                 panda.if_init_ready_pose = False

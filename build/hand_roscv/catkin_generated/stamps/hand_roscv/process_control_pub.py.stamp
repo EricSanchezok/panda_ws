@@ -31,9 +31,9 @@ import os
 
 import cv2
 
-file_dir = "scripts/dataset/test_data.csv"
+file_dir = "scripts/dataset/aliang_data.csv"
 abs_file_dir = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__))), file_dir)
-saveMode = False
+saveMode = True
 if saveMode:
     flip_hand_detector = ph.mediaPipeHand()
     data_saver = ph.DataSaver(abs_file_dir)
@@ -85,7 +85,7 @@ def publish_message():
 
         pred_index = pg.get_pred(model, points, angle_list, IsPrint=False)
 
-        cv2.namedWindow('ResaultWindow', cv2.WINDOW_AUTOSIZE)
+        cv2.namedWindow('ResaultWindow', cv2.WINDOW_NORMAL)
 
         if saveMode:
             #左右翻转

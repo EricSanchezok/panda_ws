@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import pandas as pd
+import numpy as np
 
 import hand_roscv.process_data as p_data
 import hand_roscv.pointnet_model as pm
@@ -9,9 +10,27 @@ import hand_roscv.visualization as vs
 import os
 
 # 读取训练数据
-file_dir = "scripts/dataset/new_data.csv"
+file_dir = "scripts/dataset/xiaohang_data.csv"
 abs_file_dir = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__))), file_dir)
-train_data = pd.read_csv(abs_file_dir)
+xiaohang_data = pd.read_csv(abs_file_dir)
+print(xiaohang_data.shape)
+
+xiaohang_numpy = xiaohang_data.to_numpy()
+
+file_dir = "scripts/dataset/aliang_data.csv"
+abs_file_dir = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__))), file_dir)
+aliang_data = pd.read_csv(abs_file_dir)
+print(aliang_data.shape)
+
+aliang_numpy = aliang_data.to_numpy()
+
+train_data = np.concatenate((xiaohang_numpy, aliang_numpy), axis=0)
+
+print(train_data.shape)
+
+# 转换成dataframe
+train_data = pd.DataFrame(train_data)
+
 
 # 查看最后一列
 print(train_data.iloc[:, -1].value_counts())

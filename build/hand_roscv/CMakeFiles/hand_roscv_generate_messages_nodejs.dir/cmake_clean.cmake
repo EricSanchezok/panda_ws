@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "../devel/share/gennodejs/ros/hand_roscv/msg/control_msg.js"
-  "../devel/share/gennodejs/ros/hand_roscv/srv/control_srv.js"
+  "/home/ericsanchez/ros/ros1/panda_ws/devel/share/gennodejs/ros/hand_roscv/msg/control_msg.js"
+  "/home/ericsanchez/ros/ros1/panda_ws/devel/share/gennodejs/ros/hand_roscv/srv/control_srv.js"
   "CMakeFiles/hand_roscv_generate_messages_nodejs"
 )
 

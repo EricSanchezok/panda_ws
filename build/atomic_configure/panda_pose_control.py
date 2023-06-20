@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/home/ericsanchez/anaconda3/envs/dl/bin/python
 # -*- coding: utf-8 -*-
 # generated from catkin/cmake/template/script.py.in
 # creates a relay to a python script source file, acting as that file.

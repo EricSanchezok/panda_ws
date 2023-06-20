@@ -1,4 +1,4 @@
-prefix=/usr/local
+prefix=/home/ericsanchez/ros/ros1/panda_ws/install
 
 Name: panda_moveit_config
 Description: Description of panda_moveit_config

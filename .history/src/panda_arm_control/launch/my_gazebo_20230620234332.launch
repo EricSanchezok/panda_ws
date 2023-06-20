@@ -1,0 +1,23 @@
+roslaunch franka_gazebo panda.launch x:=-0.5 \
+    world:=$(rospack find franka_gazebo)/world/stone.sdf \
+    controller:=effector_cartesian_controller \
+    rviz:=true
+
+<?xml version="1.0" ?>
+<launch>
+
+    <include file="$(find franka_gazebo)/launch/panda.launch" pass_all_args="true">
+        <arg name="allow_trajectory_execution" value="true" />
+        <arg name="info" value="true" />
+    </include>
+    <param name="robot_description"
+         command="xacro $(find franka_description)/robots/panda/panda.urdf.xacro
+                  gazebo:=true
+                  hand:=$(arg use_gripper)
+                  arm_id:=$(arg arm_id)
+                  xyz:='$(arg x) $(arg y) $(arg z)'
+                  rpy:='$(arg roll) $(arg pitch) $(arg yaw)'
+                  $(arg xacro_args)">
+    </param>
+
+</launch>

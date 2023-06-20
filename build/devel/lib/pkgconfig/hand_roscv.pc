@@ -1,8 +1,0 @@
-prefix=/home/ericsanchez/ros/ros1/panda_ws/build/devel
-
-Name: hand_roscv
-Description: Description of hand_roscv
-Version: 0.0.0
-Cflags: -I/home/ericsanchez/ros/ros1/panda_ws/build/devel/include
-Libs: -L${prefix}/lib 
-Requires: cv_bridge image_transport roscpp rospy sensor_msgs std_msgs message_runtime
