@@ -7,7 +7,6 @@ from moveit_commander import MoveGroupCommander
 from geometry_msgs.msg import Pose
 from copy import deepcopy
 
-from hand_roscv.msg import control_msg
 from hand_roscv.srv import control_srv, control_srvResponse, control_srvRequest
 
 import geometry_msgs.msg

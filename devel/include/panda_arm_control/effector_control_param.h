@@ -24,7 +24,8 @@ struct effector_control_param_
   typedef effector_control_param_<ContainerAllocator> Type;
 
   effector_control_param_()
-    : type()
+    : work_mode()
+    , supplement()
     , x0(0.0)
     , y0(0.0)
     , z0(0.0)
@@ -34,7 +35,8 @@ struct effector_control_param_
     , w(0.0)  {
     }
   effector_control_param_(const ContainerAllocator& _alloc)
-    : type(_alloc)
+    : work_mode(_alloc)
+    , supplement(_alloc)
     , x0(0.0)
     , y0(0.0)
     , z0(0.0)
@@ -47,8 +49,11 @@ struct effector_control_param_
 
 
 
-   typedef std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>> _type_type;
-  _type_type type;
+   typedef std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>> _work_mode_type;
+  _work_mode_type work_mode;
+
+   typedef std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>> _supplement_type;
+  _supplement_type supplement;
 
    typedef float _x0_type;
   _x0_type x0;
@@ -100,7 +105,8 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::panda_arm_control::effector_control_param_<ContainerAllocator1> & lhs, const ::panda_arm_control::effector_control_param_<ContainerAllocator2> & rhs)
 {
-  return lhs.type == rhs.type &&
+  return lhs.work_mode == rhs.work_mode &&
+    lhs.supplement == rhs.supplement &&
     lhs.x0 == rhs.x0 &&
     lhs.y0 == rhs.y0 &&
     lhs.z0 == rhs.z0 &&
@@ -164,12 +170,12 @@ struct MD5Sum< ::panda_arm_control::effector_control_param_<ContainerAllocator> 
 {
   static const char* value()
   {
-    return "67ada03f2ea0b0c7f0ae00ddfff182e8";
+    return "3d06e5bea688509f1828a02e984cfc20";
   }
 
   static const char* value(const ::panda_arm_control::effector_control_param_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x67ada03f2ea0b0c7ULL;
-  static const uint64_t static_value2 = 0xf0ae00ddfff182e8ULL;
+  static const uint64_t static_value1 = 0x3d06e5bea688509fULL;
+  static const uint64_t static_value2 = 0x1828a02e984cfc20ULL;
 };
 
 template<class ContainerAllocator>
@@ -188,7 +194,8 @@ struct Definition< ::panda_arm_control::effector_control_param_<ContainerAllocat
 {
   static const char* value()
   {
-    return "string type\n"
+    return "string work_mode\n"
+"string supplement\n"
 "float32 x0\n"
 "float32 y0\n"
 "float32 z0\n"
@@ -196,6 +203,7 @@ struct Definition< ::panda_arm_control::effector_control_param_<ContainerAllocat
 "float32 y\n"
 "float32 z\n"
 "float32 w\n"
+"#moveit_msgs/RobotTrajectory path\n"
 ;
   }
 
@@ -214,7 +222,8 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.type);
+      stream.next(m.work_mode);
+      stream.next(m.supplement);
       stream.next(m.x0);
       stream.next(m.y0);
       stream.next(m.z0);
@@ -240,8 +249,10 @@ struct Printer< ::panda_arm_control::effector_control_param_<ContainerAllocator>
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::panda_arm_control::effector_control_param_<ContainerAllocator>& v)
   {
-    s << indent << "type: ";
-    Printer<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>::stream(s, indent + "  ", v.type);
+    s << indent << "work_mode: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>::stream(s, indent + "  ", v.work_mode);
+    s << indent << "supplement: ";
+    Printer<std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>>::stream(s, indent + "  ", v.supplement);
     s << indent << "x0: ";
     Printer<float>::stream(s, indent + "  ", v.x0);
     s << indent << "y0: ";

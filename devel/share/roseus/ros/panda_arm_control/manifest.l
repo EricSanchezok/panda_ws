@@ -5,7 +5,11 @@
 ;;  FROM /home/ericsanchez/ros/ros1/panda_ws/src/panda_arm_control/package.xml (0.0.0)
 ;; USING /opt/ros/noetic/lib/python3/dist-packages/geneus/geneus_main.py /opt/ros/noetic/share/geneus/package.xml (3.0.0)
 ;;
+(ros::load-ros-package "actionlib")
+(ros::load-ros-package "actionlib_msgs")
+(ros::load-ros-package "franka_msgs")
 (ros::load-ros-package "roscpp")
 (ros::load-ros-package "rosgraph_msgs")
 (ros::load-ros-package "std_msgs")
+(ros::load-ros-package "std_srvs")
 (ros::load-ros-package "panda_arm_control")

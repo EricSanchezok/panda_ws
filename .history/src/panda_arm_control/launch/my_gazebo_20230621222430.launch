@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<launch>
+ 
+    <rosparam file="$(find panda_arm_control)/config/sim_controllers.yaml" subst_value="true" />
+
+    <include file="$(find franka_gazebo)/launch/panda.launch" pass_all_args="true">
+   <arg name="gazebo"      default="true"  doc="Should the gazebo simulation be launched? Use false in case if you want to include this file and launch gazebo yourself" />
+    <arg name="headless"    default="false" doc="Should the gazebo GUI be launched?" />
+    <arg name="paused"      default="false" doc="Should the simulation directly be stopped at 0s?" />
+    <arg name="world"       default="worlds/empty.world" doc="Filename to a SDF World for gazebo to use" />
+    <arg name="rviz"        default="true" doc="Should RVIz be launched?" />
+
+    <arg name="arm_id"      default="panda" doc="Name of the panda robot to spawn" />
+    <arg name="use_gripper" default="true"  doc="Should a franka hand be mounted on the flange?" />
+    <arg name="controller"  default="effector_cartesian_controller"     doc="Which example controller should be started? (One of {cartesian_impedance,model,force,joint_position,joint_velocity}_example_controller)" />
+
+    </include>
+
+    <!-- Start the actual move_group node/action server -->
+    <node name="move_group" launch-prefix="$(arg launch_prefix)" pkg="moveit_ros_move_group" type="move_group" respawn="false" output="screen" args="$(arg command_args)">
+        <!-- Set the display variable, in case OpenGL code is used internally -->
+        <env name="DISPLAY" value="$(optenv DISPLAY :0)" />
+
+        <param name="allow_trajectory_execution" value="$(arg allow_trajectory_execution)"/>
+        <param name="sense_for_plan/max_safe_path_cost" value="$(arg max_safe_path_cost)"/>
+        <param name="default_planning_pipeline" value="$(arg pipeline)" />
+        <param name="capabilities" value="$(arg capabilities)" />
+        <param name="disable_capabilities" value="$(arg disable_capabilities)" />
+
+        <!-- Publish the planning scene of the physical robot so that rviz plugin can know actual robot -->
+        <param name="planning_scene_monitor/publish_planning_scene" value="$(arg publish_monitored_planning_scene)" />
+        <param name="planning_scene_monitor/publish_geometry_updates" value="$(arg publish_monitored_planning_scene)" />
+        <param name="planning_scene_monitor/publish_state_updates" value="$(arg publish_monitored_planning_scene)" />
+        <param name="planning_scene_monitor/publish_transforms_updates" value="$(arg publish_monitored_planning_scene)" />
+    </node>
+
+
+</launch>

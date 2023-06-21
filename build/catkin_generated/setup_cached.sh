@@ -7,8 +7,6 @@
 # new environment variables
 
 # modified environment variables
-export LD_LIBRARY_PATH='/opt/ros/noetic/lib:/opt/ros/noetic/lib/x86_64-linux-gnu'
-export PATH='/opt/ros/noetic/bin:/home/ericsanchez/sofa/build/bin:/home/ericsanchez/anaconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
-export PKG_CONFIG_PATH='/opt/ros/noetic/lib/pkgconfig:/opt/ros/noetic/lib/x86_64-linux-gnu/pkgconfig'
+export PATH='/opt/ros/noetic/bin:/home/ericsanchez/anaconda3/envs/dl/bin:/home/ericsanchez/sofa/build/bin:/home/ericsanchez/sofa/build/bin:/home/ericsanchez/anaconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
 export PWD='/home/ericsanchez/ros/ros1/panda_ws/build'
-export PYTHONPATH='/opt/ros/noetic/lib/python3/dist-packages:/home/ericsanchez/sofa/build/lib/python3/site-packages'
+export PYTHONPATH='/home/ericsanchez/ros/ros1/franka_ws/devel/lib/python3/dist-packages:/home/ericsanchez/ros/ros1/panda_ws/devel/lib/python3/dist-packages:/opt/ros/noetic/lib/python3/dist-packages:/home/ericsanchez/sofa/build/lib/python3/site-packages:/home/ericsanchez/sofa/build/lib/python3/site-packages'

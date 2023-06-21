@@ -56,6 +56,7 @@
 
   <depend>controller_interface</depend>
   <depend>hardware_interface</depend>
+  <depend>franka_hw</depend>
   <depend>pluginlib</depend>
 
 
@@ -70,10 +71,6 @@
 
   <build_depend>message_generation</build_depend>
   <exec_depend>message_runtime</exec_depend>
-
-
-
-
 
 
   <!-- The export tag contains other, unspecified, tags -->

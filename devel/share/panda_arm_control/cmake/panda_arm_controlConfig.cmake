@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(panda_arm_control_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/ericsanchez/ros/ros1/panda_ws/devel/include;/home/ericsanchez/ros/ros1/panda_ws/src/panda_arm_control/include;/opt/ros/noetic/include " STREQUAL " ")
+if(NOT "/home/ericsanchez/ros/ros1/panda_ws/devel/include;/home/ericsanchez/ros/ros1/panda_ws/src/panda_arm_control/include;/usr/include " STREQUAL " ")
   set(panda_arm_control_INCLUDE_DIRS "")
-  set(_include_dirs "/home/ericsanchez/ros/ros1/panda_ws/devel/include;/home/ericsanchez/ros/ros1/panda_ws/src/panda_arm_control/include;/opt/ros/noetic/include")
+  set(_include_dirs "/home/ericsanchez/ros/ros1/panda_ws/devel/include;/home/ericsanchez/ros/ros1/panda_ws/src/panda_arm_control/include;/usr/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -116,7 +116,7 @@ if(NOT "/home/ericsanchez/ros/ros1/panda_ws/devel/include;/home/ericsanchez/ros/
   endforeach()
 endif()
 
-set(libraries "panda_arm_control;/opt/ros/noetic/lib/x86_64-linux-gnu/libfranka.so.0.9.2")
+set(libraries "panda_arm_control;/usr/lib/libfranka.so.0.9.2")
 foreach(library ${libraries})
   # keep build configuration keywords, target names and absolute libraries as-is
   if("${library}" MATCHES "^(debug|optimized|general)$")
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/ericsanchez/ros/ros1/panda_ws/devel/lib;/home/ericsanchez/ros/ros1/panda_ws/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/ericsanchez/ros/ros1/panda_ws/devel/lib;/home/ericsanchez/ros/ros1/franka_ws/devel/lib;/home/ericsanchez/ros/ros1/panda_ws/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -185,7 +185,7 @@ foreach(t ${panda_arm_control_EXPORTED_TARGETS})
   endif()
 endforeach()
 
-set(depends "roscpp;rospy;std_msgs;controller_interface;hardware_interface;pluginlib;message_runtime")
+set(depends "roscpp;rospy;std_msgs;controller_interface;hardware_interface;franka_hw;pluginlib;message_runtime")
 foreach(depend ${depends})
   string(REPLACE " " ";" depend_list ${depend})
   # the package name of the dependency must be kept in a unique variable so that it is not overwritten in recursive calls

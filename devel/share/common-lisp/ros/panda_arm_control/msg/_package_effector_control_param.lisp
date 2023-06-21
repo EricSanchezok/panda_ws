@@ -1,6 +1,8 @@
 (cl:in-package panda_arm_control-msg)
-(cl:export '(TYPE-VAL
-          TYPE
+(cl:export '(WORK_MODE-VAL
+          WORK_MODE
+          SUPPLEMENT-VAL
+          SUPPLEMENT
           X0-VAL
           X0
           Y0-VAL

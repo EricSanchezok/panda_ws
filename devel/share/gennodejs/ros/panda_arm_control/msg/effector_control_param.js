@@ -18,7 +18,8 @@ class effector_control_param {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.type = null;
+      this.work_mode = null;
+      this.supplement = null;
       this.x0 = null;
       this.y0 = null;
       this.z0 = null;
@@ -28,11 +29,17 @@ class effector_control_param {
       this.w = null;
     }
     else {
-      if (initObj.hasOwnProperty('type')) {
-        this.type = initObj.type
+      if (initObj.hasOwnProperty('work_mode')) {
+        this.work_mode = initObj.work_mode
       }
       else {
-        this.type = '';
+        this.work_mode = '';
+      }
+      if (initObj.hasOwnProperty('supplement')) {
+        this.supplement = initObj.supplement
+      }
+      else {
+        this.supplement = '';
       }
       if (initObj.hasOwnProperty('x0')) {
         this.x0 = initObj.x0
@@ -81,8 +88,10 @@ class effector_control_param {
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type effector_control_param
-    // Serialize message field [type]
-    bufferOffset = _serializer.string(obj.type, buffer, bufferOffset);
+    // Serialize message field [work_mode]
+    bufferOffset = _serializer.string(obj.work_mode, buffer, bufferOffset);
+    // Serialize message field [supplement]
+    bufferOffset = _serializer.string(obj.supplement, buffer, bufferOffset);
     // Serialize message field [x0]
     bufferOffset = _serializer.float32(obj.x0, buffer, bufferOffset);
     // Serialize message field [y0]
@@ -104,8 +113,10 @@ class effector_control_param {
     //deserializes a message object of type effector_control_param
     let len;
     let data = new effector_control_param(null);
-    // Deserialize message field [type]
-    data.type = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [work_mode]
+    data.work_mode = _deserializer.string(buffer, bufferOffset);
+    // Deserialize message field [supplement]
+    data.supplement = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [x0]
     data.x0 = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [y0]
@@ -125,8 +136,9 @@ class effector_control_param {
 
   static getMessageSize(object) {
     let length = 0;
-    length += _getByteLength(object.type);
-    return length + 32;
+    length += _getByteLength(object.work_mode);
+    length += _getByteLength(object.supplement);
+    return length + 36;
   }
 
   static datatype() {
@@ -136,13 +148,14 @@ class effector_control_param {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '67ada03f2ea0b0c7f0ae00ddfff182e8';
+    return '3d06e5bea688509f1828a02e984cfc20';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    string type
+    string work_mode
+    string supplement
     float32 x0
     float32 y0
     float32 z0
@@ -150,6 +163,7 @@ class effector_control_param {
     float32 y
     float32 z
     float32 w
+    #moveit_msgs/RobotTrajectory path
     `;
   }
 
@@ -159,11 +173,18 @@ class effector_control_param {
       msg = {};
     }
     const resolved = new effector_control_param(null);
-    if (msg.type !== undefined) {
-      resolved.type = msg.type;
+    if (msg.work_mode !== undefined) {
+      resolved.work_mode = msg.work_mode;
     }
     else {
-      resolved.type = ''
+      resolved.work_mode = ''
+    }
+
+    if (msg.supplement !== undefined) {
+      resolved.supplement = msg.supplement;
+    }
+    else {
+      resolved.supplement = ''
     }
 
     if (msg.x0 !== undefined) {

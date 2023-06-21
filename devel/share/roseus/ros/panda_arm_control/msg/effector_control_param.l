@@ -14,12 +14,13 @@
 
 (defclass panda_arm_control::effector_control_param
   :super ros::object
-  :slots (_type _x0 _y0 _z0 _x _y _z _w ))
+  :slots (_work_mode _supplement _x0 _y0 _z0 _x _y _z _w ))
 
 (defmethod panda_arm_control::effector_control_param
   (:init
    (&key
-    ((:type __type) "")
+    ((:work_mode __work_mode) "")
+    ((:supplement __supplement) "")
     ((:x0 __x0) 0.0)
     ((:y0 __y0) 0.0)
     ((:z0 __z0) 0.0)
@@ -29,7 +30,8 @@
     ((:w __w) 0.0)
     )
    (send-super :init)
-   (setq _type (string __type))
+   (setq _work_mode (string __work_mode))
+   (setq _supplement (string __supplement))
    (setq _x0 (float __x0))
    (setq _y0 (float __y0))
    (setq _z0 (float __z0))
@@ -38,9 +40,12 @@
    (setq _z (float __z))
    (setq _w (float __w))
    self)
-  (:type
-   (&optional __type)
-   (if __type (setq _type __type)) _type)
+  (:work_mode
+   (&optional __work_mode)
+   (if __work_mode (setq _work_mode __work_mode)) _work_mode)
+  (:supplement
+   (&optional __supplement)
+   (if __supplement (setq _supplement __supplement)) _supplement)
   (:x0
    (&optional __x0)
    (if __x0 (setq _x0 __x0)) _x0)
@@ -65,8 +70,10 @@
   (:serialization-length
    ()
    (+
-    ;; string _type
-    4 (length _type)
+    ;; string _work_mode
+    4 (length _work_mode)
+    ;; string _supplement
+    4 (length _supplement)
     ;; float32 _x0
     4
     ;; float32 _y0
@@ -86,8 +93,10 @@
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; string _type
-       (write-long (length _type) s) (princ _type s)
+     ;; string _work_mode
+       (write-long (length _work_mode) s) (princ _work_mode s)
+     ;; string _supplement
+       (write-long (length _supplement) s) (princ _supplement s)
      ;; float32 _x0
        (sys::poke _x0 (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
      ;; float32 _y0
@@ -106,8 +115,10 @@
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; string _type
-     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _type (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; string _work_mode
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _work_mode (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
+   ;; string _supplement
+     (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _supplement (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
    ;; float32 _x0
      (setq _x0 (sys::peek buf ptr- :float)) (incf ptr- 4)
    ;; float32 _y0
@@ -126,10 +137,11 @@
    self)
   )
 
-(setf (get panda_arm_control::effector_control_param :md5sum-) "67ada03f2ea0b0c7f0ae00ddfff182e8")
+(setf (get panda_arm_control::effector_control_param :md5sum-) "3d06e5bea688509f1828a02e984cfc20")
 (setf (get panda_arm_control::effector_control_param :datatype-) "panda_arm_control/effector_control_param")
 (setf (get panda_arm_control::effector_control_param :definition-)
-      "string type
+      "string work_mode
+string supplement
 float32 x0
 float32 y0
 float32 z0
@@ -137,10 +149,11 @@ float32 x
 float32 y
 float32 z
 float32 w
+#moveit_msgs/RobotTrajectory path
 ")
 
 
 
-(provide :panda_arm_control/effector_control_param "67ada03f2ea0b0c7f0ae00ddfff182e8")
+(provide :panda_arm_control/effector_control_param "3d06e5bea688509f1828a02e984cfc20")
 
 

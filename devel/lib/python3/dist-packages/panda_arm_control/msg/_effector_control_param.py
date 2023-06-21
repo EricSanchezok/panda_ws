@@ -8,19 +8,21 @@ import struct
 
 
 class effector_control_param(genpy.Message):
-  _md5sum = "67ada03f2ea0b0c7f0ae00ddfff182e8"
+  _md5sum = "3d06e5bea688509f1828a02e984cfc20"
   _type = "panda_arm_control/effector_control_param"
   _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """string type
+  _full_text = """string work_mode
+string supplement
 float32 x0
 float32 y0
 float32 z0
 float32 x
 float32 y
 float32 z
-float32 w"""
-  __slots__ = ['type','x0','y0','z0','x','y','z','w']
-  _slot_types = ['string','float32','float32','float32','float32','float32','float32','float32']
+float32 w
+#moveit_msgs/RobotTrajectory path"""
+  __slots__ = ['work_mode','supplement','x0','y0','z0','x','y','z','w']
+  _slot_types = ['string','string','float32','float32','float32','float32','float32','float32','float32']
 
   def __init__(self, *args, **kwds):
     """
@@ -30,7 +32,7 @@ float32 w"""
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       type,x0,y0,z0,x,y,z,w
+       work_mode,supplement,x0,y0,z0,x,y,z,w
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -39,8 +41,10 @@ float32 w"""
     if args or kwds:
       super(effector_control_param, self).__init__(*args, **kwds)
       # message fields cannot be None, assign default values for those that are
-      if self.type is None:
-        self.type = ''
+      if self.work_mode is None:
+        self.work_mode = ''
+      if self.supplement is None:
+        self.supplement = ''
       if self.x0 is None:
         self.x0 = 0.
       if self.y0 is None:
@@ -56,7 +60,8 @@ float32 w"""
       if self.w is None:
         self.w = 0.
     else:
-      self.type = ''
+      self.work_mode = ''
+      self.supplement = ''
       self.x0 = 0.
       self.y0 = 0.
       self.z0 = 0.
@@ -77,7 +82,13 @@ float32 w"""
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self.type
+      _x = self.work_mode
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
+      _x = self.supplement
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
@@ -103,9 +114,18 @@ float32 w"""
       start = end
       end += length
       if python3:
-        self.type = str[start:end].decode('utf-8', 'rosmsg')
+        self.work_mode = str[start:end].decode('utf-8', 'rosmsg')
       else:
-        self.type = str[start:end]
+        self.work_mode = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.supplement = str[start:end].decode('utf-8', 'rosmsg')
+      else:
+        self.supplement = str[start:end]
       _x = self
       start = end
       end += 28
@@ -122,7 +142,13 @@ float32 w"""
     :param numpy: numpy python module
     """
     try:
-      _x = self.type
+      _x = self.work_mode
+      length = len(_x)
+      if python3 or type(_x) == unicode:
+        _x = _x.encode('utf-8')
+        length = len(_x)
+      buff.write(struct.Struct('<I%ss'%length).pack(length, _x))
+      _x = self.supplement
       length = len(_x)
       if python3 or type(_x) == unicode:
         _x = _x.encode('utf-8')
@@ -149,9 +175,18 @@ float32 w"""
       start = end
       end += length
       if python3:
-        self.type = str[start:end].decode('utf-8', 'rosmsg')
+        self.work_mode = str[start:end].decode('utf-8', 'rosmsg')
       else:
-        self.type = str[start:end]
+        self.work_mode = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      if python3:
+        self.supplement = str[start:end].decode('utf-8', 'rosmsg')
+      else:
+        self.supplement = str[start:end]
       _x = self
       start = end
       end += 28
