@@ -1,4 +1,4 @@
-#!/home/ericsanchez/anaconda3/envs/dl/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # Software License Agreement (BSD License)

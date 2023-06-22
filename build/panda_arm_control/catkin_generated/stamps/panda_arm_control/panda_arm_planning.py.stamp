@@ -28,14 +28,10 @@ class panda_moveit:
         # self.clt.wait_for_service()
 
         self.request_num = 0
-
-        print("panda_moveit init")
       
         # 初始化需要使用move group控制的机械臂中的arm group
         self.arm = MoveGroupCommander('panda_arm')
         self.robot = moveit_commander.RobotCommander()
-
-        print("panda_moveit init 2")
 
         # 当运动规划失败后，允许重新规划
         self.arm.allow_replanning(True)
@@ -51,7 +47,6 @@ class panda_moveit:
         self.arm.set_max_acceleration_scaling_factor(1.0)
         self.arm.set_max_velocity_scaling_factor(1.0)
 
-        
         # 获取终端link的名称
         self.end_effector_link = self.arm.get_end_effector_link()
 
@@ -68,13 +63,13 @@ class panda_moveit:
 
         self.move_coff = 0.5
 
-panda = panda_moveit()
+
 
 
 def main():
+    panda = panda_moveit()
 
     # 定义循环时间
-
     rate = rospy.Rate(10)
 
     while not rospy.is_shutdown():

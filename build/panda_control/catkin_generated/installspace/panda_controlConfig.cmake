@@ -68,13 +68,13 @@ set(panda_control_CONFIG_INCLUDED TRUE)
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
   set(panda_control_SOURCE_PREFIX /home/ericsanchez/ros/ros1/panda_ws/src/panda_control)
-  set(panda_control_DEVEL_PREFIX /home/ericsanchez/ros/ros1/panda_ws/devel)
+  set(panda_control_DEVEL_PREFIX /home/ericsanchez/ros/ros1/panda_ws/build/devel)
   set(panda_control_INSTALL_PREFIX "")
   set(panda_control_PREFIX ${panda_control_DEVEL_PREFIX})
 else()
   set(panda_control_SOURCE_PREFIX "")
   set(panda_control_DEVEL_PREFIX "")
-  set(panda_control_INSTALL_PREFIX /home/ericsanchez/ros/ros1/panda_ws/install)
+  set(panda_control_INSTALL_PREFIX /usr/local)
   set(panda_control_PREFIX ${panda_control_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/ericsanchez/ros/ros1/panda_ws/install/lib;/home/ericsanchez/ros/ros1/franka_ws/devel/lib;/home/ericsanchez/ros/ros1/panda_ws/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /usr/local/lib;/home/ericsanchez/ros/ros1/franka_ws/devel/lib;/home/ericsanchez/ros/ros1/panda_ws/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

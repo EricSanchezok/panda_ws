@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/ericsanchez/ros/ros1/panda_ws/devel/include/panda_arm_control/effector_control_param.h"
+  "../devel/include/panda_arm_control/effector_control_param.h"
   "CMakeFiles/panda_arm_control_generate_messages_cpp"
 )
 

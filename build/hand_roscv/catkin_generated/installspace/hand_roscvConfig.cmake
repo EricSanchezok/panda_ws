@@ -68,13 +68,13 @@ set(hand_roscv_CONFIG_INCLUDED TRUE)
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
   set(hand_roscv_SOURCE_PREFIX /home/ericsanchez/ros/ros1/panda_ws/src/hand_roscv)
-  set(hand_roscv_DEVEL_PREFIX /home/ericsanchez/ros/ros1/panda_ws/devel)
+  set(hand_roscv_DEVEL_PREFIX /home/ericsanchez/ros/ros1/panda_ws/build/devel)
   set(hand_roscv_INSTALL_PREFIX "")
   set(hand_roscv_PREFIX ${hand_roscv_DEVEL_PREFIX})
 else()
   set(hand_roscv_SOURCE_PREFIX "")
   set(hand_roscv_DEVEL_PREFIX "")
-  set(hand_roscv_INSTALL_PREFIX /home/ericsanchez/ros/ros1/panda_ws/install)
+  set(hand_roscv_INSTALL_PREFIX /usr/local)
   set(hand_roscv_PREFIX ${hand_roscv_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/ericsanchez/ros/ros1/panda_ws/install/lib;/home/ericsanchez/ros/ros1/franka_ws/devel/lib;/home/ericsanchez/ros/ros1/panda_ws/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /usr/local/lib;/home/ericsanchez/ros/ros1/franka_ws/devel/lib;/home/ericsanchez/ros/ros1/panda_ws/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

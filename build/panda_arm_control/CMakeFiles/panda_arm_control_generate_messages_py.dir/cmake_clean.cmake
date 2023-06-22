@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/ericsanchez/ros/ros1/panda_ws/devel/lib/python3/dist-packages/panda_arm_control/msg/__init__.py"
-  "/home/ericsanchez/ros/ros1/panda_ws/devel/lib/python3/dist-packages/panda_arm_control/msg/_effector_control_param.py"
+  "../devel/lib/python3/dist-packages/panda_arm_control/msg/__init__.py"
+  "../devel/lib/python3/dist-packages/panda_arm_control/msg/_effector_control_param.py"
   "CMakeFiles/panda_arm_control_generate_messages_py"
 )
 

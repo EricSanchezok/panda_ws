@@ -1,8 +1,7 @@
 file(REMOVE_RECURSE
-  "../../bin/libgmock.pdb"
-  "../lib/libgmock.so"
+  "../../bin/libgmockd.pdb"
+  "../lib/libgmockd.so"
   "CMakeFiles/gmock.dir/src/gmock-all.cc.o"
-  "CMakeFiles/gmock.dir/src/gmock-all.cc.o.d"
 )
 
 # Per-language clean rules from dependency scanning.
