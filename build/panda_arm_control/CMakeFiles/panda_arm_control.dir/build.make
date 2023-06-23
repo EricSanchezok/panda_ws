@@ -80,9 +80,9 @@ panda_arm_control_EXTERNAL_OBJECTS =
 devel/lib/libpanda_arm_control.so: panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o
 devel/lib/libpanda_arm_control.so: panda_arm_control/CMakeFiles/panda_arm_control.dir/build.make
 devel/lib/libpanda_arm_control.so: /usr/lib/libfranka.so.0.8.0
-devel/lib/libpanda_arm_control.so: /home/ericsanchez/ros/ros1/franka_ws/devel/lib/libfranka_hw.so
-devel/lib/libpanda_arm_control.so: /home/ericsanchez/ros/ros1/franka_ws/devel/lib/libfranka_control_services.so
-devel/lib/libpanda_arm_control.so: /home/ericsanchez/ros/libfranka/build/libfranka.so.0.8.0
+devel/lib/libpanda_arm_control.so: /home/ericsanchez/ros/ros1/franka_ws_new/devel/lib/libfranka_hw.so
+devel/lib/libpanda_arm_control.so: /home/ericsanchez/ros/ros1/franka_ws_new/devel/lib/libfranka_control_services.so
+devel/lib/libpanda_arm_control.so: /usr/lib/libfranka.so.0.8.0
 devel/lib/libpanda_arm_control.so: /opt/ros/noetic/lib/libactionlib.so
 devel/lib/libpanda_arm_control.so: /opt/ros/noetic/lib/libcombined_robot_hw.so
 devel/lib/libpanda_arm_control.so: /opt/ros/noetic/lib/liburdf.so

@@ -6,5 +6,5 @@ CXX_FLAGS = -O3 -DNDEBUG -fPIC   -std=gnu++14
 
 CXX_DEFINES = -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"panda_arm_control\" -Dpanda_arm_control_EXPORTS
 
-CXX_INCLUDES = -I/home/ericsanchez/ros/ros1/panda_ws/build/devel/include -I/home/ericsanchez/ros/ros1/panda_ws/src/panda_arm_control/include -isystem /home/ericsanchez/ros/ros1/franka_ws/devel/include -isystem /home/ericsanchez/ros/ros1/franka_ws/src/franka_ros/franka_hw/include -isystem /opt/ros/noetic/include -isystem /opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /home/ericsanchez/ros/libfranka/include -isystem /usr/include/eigen3 
+CXX_INCLUDES = -I/home/ericsanchez/ros/ros1/panda_ws/build/devel/include -I/home/ericsanchez/ros/ros1/panda_ws/src/panda_arm_control/include -isystem /home/ericsanchez/ros/ros1/franka_ws_new/devel/include -isystem /home/ericsanchez/ros/ros1/franka_ws_new/src/franka_ros/franka_hw/include -isystem /opt/ros/noetic/include -isystem /opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /usr/include/eigen3 
 

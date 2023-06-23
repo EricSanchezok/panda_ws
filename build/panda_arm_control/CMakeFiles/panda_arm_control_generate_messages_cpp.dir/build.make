@@ -58,8 +58,8 @@ panda_arm_control/CMakeFiles/panda_arm_control_generate_messages_cpp: devel/incl
 
 devel/include/panda_arm_control/effector_control_param.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 devel/include/panda_arm_control/effector_control_param.h: /home/ericsanchez/ros/ros1/panda_ws/src/panda_arm_control/msg/effector_control_param.msg
-devel/include/panda_arm_control/effector_control_param.h: /opt/ros/noetic/share/trajectory_msgs/msg/JointTrajectoryPoint.msg
 devel/include/panda_arm_control/effector_control_param.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+devel/include/panda_arm_control/effector_control_param.h: /opt/ros/noetic/share/trajectory_msgs/msg/JointTrajectoryPoint.msg
 devel/include/panda_arm_control/effector_control_param.h: /opt/ros/noetic/share/trajectory_msgs/msg/JointTrajectory.msg
 devel/include/panda_arm_control/effector_control_param.h: /opt/ros/noetic/share/gencpp/msg.h.template
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ericsanchez/ros/ros1/panda_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from panda_arm_control/effector_control_param.msg"

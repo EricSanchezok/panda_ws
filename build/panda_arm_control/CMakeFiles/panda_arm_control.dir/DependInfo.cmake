@@ -20,11 +20,10 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "devel/include"
   "/home/ericsanchez/ros/ros1/panda_ws/src/panda_arm_control/include"
-  "/home/ericsanchez/ros/ros1/franka_ws/devel/include"
-  "/home/ericsanchez/ros/ros1/franka_ws/src/franka_ros/franka_hw/include"
+  "/home/ericsanchez/ros/ros1/franka_ws_new/devel/include"
+  "/home/ericsanchez/ros/ros1/franka_ws_new/src/franka_ros/franka_hw/include"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
-  "/home/ericsanchez/ros/libfranka/include"
   "/usr/include/eigen3"
   )
 
