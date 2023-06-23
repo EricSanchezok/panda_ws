@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<launch>
+
+    <arg name="arm_id"      default="panda" doc="Name of the panda robot to spawn" />
+    <arg name="use_gripper" default="true"  doc="Should a franka hand be mounted on the flange?" />
+ 
+
+
+    <arg name="robot_ip" />
+    <arg name="robot" default="panda" doc="choose your robot. Possible values: [panda, fr3]"/>
+    <arg name="arm_id" default="$(arg robot)" />
+    <arg name="load_gripper" default="true" />
+    <arg name="xacro_args" default="" />
+
+    <include file="$(find franka_gripper)/launch/franka_gripper.launch" if="$(arg load_gripper)">
+        <arg name="robot_ip" value="$(arg robot_ip)" />
+        <arg name="arm_id"   value="$(arg arm_id)" />
+    </include>
+
+    <node name="franka_control" pkg="franka_control" type="franka_control_node" output="screen" required="true">
+        <rosparam command="load" file="$(find franka_control)/config/franka_control_node.yaml" subst_value="true" />
+        <param name="robot_ip" value="$(arg robot_ip)" />
+    </node>
+
+    <rosparam file="$(find panda_arm_control)/config/sim_controllers.yaml" subst_value="true" />
+    
+    <node pkg="controller_manager"
+            type="spawner"
+            name="my_controller_spawner"
+            respawn="false" output="screen"
+            args="--wait-for initialized effector_cartesian_controller"
+    />
+
+    <!-- Run the main MoveIt executable without trajectory execution (we do not have controllers configured by default) -->
+    <include file="$(find panda_arm_control)/launch/move_group.launch" pass_all_args="true">
+        <arg name="arm_id"      value="$(arg arm_id)" />
+        <arg name="use_gripper" default="$(arg use_gripper)" />
+
+        <arg name="allow_trajectory_execution" value="false" />
+        <arg name="info" value="true" />
+    </include>
+
+    <include file="$(find franka_gazebo)/launch/panda.launch" pass_all_args="true">
+
+        <arg name="gazebo"      default="true"  doc="Should the gazebo simulation be launched? Use false in case if you want to include this file and launch gazebo yourself" />
+        <arg name="headless"    default="false" doc="Should the gazebo GUI be launched?" />
+        <arg name="paused"      default="false" doc="Should the simulation directly be stopped at 0s?" />
+        <arg name="world"       default="worlds/empty.world" doc="Filename to a SDF World for gazebo to use" />
+        <arg name="rviz"        default="true" doc="Should RVIz be launched?" />
+
+        <arg name="arm_id"      value="$(arg arm_id)" />
+        <arg name="use_gripper" default="$(arg use_gripper)" />
+        <arg name="controller"  default=""     doc="Which example controller should be started? (One of {cartesian_impedance,model,force,joint_position,joint_velocity}_example_controller)" />
+
+    </include>
+
+
+
+</launch>

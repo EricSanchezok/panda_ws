@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/ericsanchez/ros/ros1/panda_ws/build
 include panda_arm_control/CMakeFiles/_panda_arm_control_generate_messages_check_deps_effector_control_param.dir/progress.make
 
 panda_arm_control/CMakeFiles/_panda_arm_control_generate_messages_check_deps_effector_control_param:
-	cd /home/ericsanchez/ros/ros1/panda_ws/build/panda_arm_control && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py panda_arm_control /home/ericsanchez/ros/ros1/panda_ws/src/panda_arm_control/msg/effector_control_param.msg std_msgs/Header:trajectory_msgs/JointTrajectoryPoint:trajectory_msgs/JointTrajectory
+	cd /home/ericsanchez/ros/ros1/panda_ws/build/panda_arm_control && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py panda_arm_control /home/ericsanchez/ros/ros1/panda_ws/src/panda_arm_control/msg/effector_control_param.msg trajectory_msgs/JointTrajectoryPoint:std_msgs/Header:trajectory_msgs/JointTrajectory
 
 _panda_arm_control_generate_messages_check_deps_effector_control_param: panda_arm_control/CMakeFiles/_panda_arm_control_generate_messages_check_deps_effector_control_param
 _panda_arm_control_generate_messages_check_deps_effector_control_param: panda_arm_control/CMakeFiles/_panda_arm_control_generate_messages_check_deps_effector_control_param.dir/build.make

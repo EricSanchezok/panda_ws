@@ -1,1 +1,1 @@
-/usr/bin/g++ -fPIC   -shared -Wl,-soname,libgtest_main.so -o ../lib/libgtest_main.so CMakeFiles/gtest_main.dir/src/gtest_main.cc.o  -Wl,-rpath,/home/ericsanchez/ros/ros1/panda_ws/build/gtest/lib ../lib/libgtest.so -lpthread 
+/usr/bin/g++ -fPIC -g  -shared -Wl,-soname,libgtest_maind.so -o ../lib/libgtest_maind.so CMakeFiles/gtest_main.dir/src/gtest_main.cc.o  -Wl,-rpath,/home/ericsanchez/ros/ros1/panda_ws/build/gtest/lib ../lib/libgtestd.so -pthread 
