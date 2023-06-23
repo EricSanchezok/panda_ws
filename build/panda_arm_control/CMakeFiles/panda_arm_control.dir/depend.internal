@@ -14,6 +14,7 @@ panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_contro
  /home/ericsanchez/ros/ros1/franka_ws/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
  /home/ericsanchez/ros/ros1/franka_ws/src/franka_ros/franka_hw/include/franka_hw/model.h
  /home/ericsanchez/ros/ros1/franka_ws/src/franka_ros/franka_hw/include/franka_hw/model_base.h
+ /home/ericsanchez/ros/ros1/panda_ws/devel/include/panda_arm_control/effector_control_param.h
  /home/ericsanchez/ros/ros1/panda_ws/src/panda_arm_control/include/panda_arm_control/effector_cartesian_controller.h
  /home/ericsanchez/ros/ros1/panda_ws/src/panda_arm_control/src/effector_cartesian_controller.cpp
  /opt/ros/noetic/include/class_loader/class_loader.hpp
@@ -93,6 +94,8 @@ panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_contro
  /opt/ros/noetic/include/ros/wall_timer.h
  /opt/ros/noetic/include/ros/wall_timer_options.h
  /opt/ros/noetic/include/rosconsole/macros_generated.h
+ /opt/ros/noetic/include/std_msgs/Header.h
+ /opt/ros/noetic/include/trajectory_msgs/JointTrajectory.h
+ /opt/ros/noetic/include/trajectory_msgs/JointTrajectoryPoint.h
  /opt/ros/noetic/include/xmlrpcpp/XmlRpcDecl.h
  /opt/ros/noetic/include/xmlrpcpp/XmlRpcValue.h
- devel/include/panda_arm_control/effector_control_param.h

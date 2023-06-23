@@ -15,6 +15,7 @@
 #include <ros/builtin_message_traits.h>
 #include <ros/message_operations.h>
 
+#include <trajectory_msgs/JointTrajectory.h>
 
 namespace panda_arm_control
 {
@@ -32,7 +33,8 @@ struct effector_control_param_
     , x(0.0)
     , y(0.0)
     , z(0.0)
-    , w(0.0)  {
+    , w(0.0)
+    , traj()  {
     }
   effector_control_param_(const ContainerAllocator& _alloc)
     : work_mode(_alloc)
@@ -43,7 +45,8 @@ struct effector_control_param_
     , x(0.0)
     , y(0.0)
     , z(0.0)
-    , w(0.0)  {
+    , w(0.0)
+    , traj(_alloc)  {
   (void)_alloc;
     }
 
@@ -75,6 +78,9 @@ struct effector_control_param_
 
    typedef float _w_type;
   _w_type w;
+
+   typedef  ::trajectory_msgs::JointTrajectory_<ContainerAllocator>  _traj_type;
+  _traj_type traj;
 
 
 
@@ -113,7 +119,8 @@ bool operator==(const ::panda_arm_control::effector_control_param_<ContainerAllo
     lhs.x == rhs.x &&
     lhs.y == rhs.y &&
     lhs.z == rhs.z &&
-    lhs.w == rhs.w;
+    lhs.w == rhs.w &&
+    lhs.traj == rhs.traj;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -170,12 +177,12 @@ struct MD5Sum< ::panda_arm_control::effector_control_param_<ContainerAllocator> 
 {
   static const char* value()
   {
-    return "3d06e5bea688509f1828a02e984cfc20";
+    return "5215bcd504493e63651b35034e0fe1c3";
   }
 
   static const char* value(const ::panda_arm_control::effector_control_param_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x3d06e5bea688509fULL;
-  static const uint64_t static_value2 = 0x1828a02e984cfc20ULL;
+  static const uint64_t static_value1 = 0x5215bcd504493e63ULL;
+  static const uint64_t static_value2 = 0x651b35034e0fe1c3ULL;
 };
 
 template<class ContainerAllocator>
@@ -203,7 +210,40 @@ struct Definition< ::panda_arm_control::effector_control_param_<ContainerAllocat
 "float32 y\n"
 "float32 z\n"
 "float32 w\n"
-"#moveit_msgs/RobotTrajectory path\n"
+"trajectory_msgs/JointTrajectory traj\n"
+"================================================================================\n"
+"MSG: trajectory_msgs/JointTrajectory\n"
+"Header header\n"
+"string[] joint_names\n"
+"JointTrajectoryPoint[] points\n"
+"\n"
+"================================================================================\n"
+"MSG: std_msgs/Header\n"
+"# Standard metadata for higher-level stamped data types.\n"
+"# This is generally used to communicate timestamped data \n"
+"# in a particular coordinate frame.\n"
+"# \n"
+"# sequence ID: consecutively increasing ID \n"
+"uint32 seq\n"
+"#Two-integer timestamp that is expressed as:\n"
+"# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')\n"
+"# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')\n"
+"# time-handling sugar is provided by the client library\n"
+"time stamp\n"
+"#Frame this data is associated with\n"
+"string frame_id\n"
+"\n"
+"================================================================================\n"
+"MSG: trajectory_msgs/JointTrajectoryPoint\n"
+"# Each trajectory point specifies either positions[, velocities[, accelerations]]\n"
+"# or positions[, effort] for the trajectory to be executed.\n"
+"# All specified values are in the same order as the joint names in JointTrajectory.msg\n"
+"\n"
+"float64[] positions\n"
+"float64[] velocities\n"
+"float64[] accelerations\n"
+"float64[] effort\n"
+"duration time_from_start\n"
 ;
   }
 
@@ -231,6 +271,7 @@ namespace serialization
       stream.next(m.y);
       stream.next(m.z);
       stream.next(m.w);
+      stream.next(m.traj);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -267,6 +308,9 @@ struct Printer< ::panda_arm_control::effector_control_param_<ContainerAllocator>
     Printer<float>::stream(s, indent + "  ", v.z);
     s << indent << "w: ";
     Printer<float>::stream(s, indent + "  ", v.w);
+    s << indent << "traj: ";
+    s << std::endl;
+    Printer< ::trajectory_msgs::JointTrajectory_<ContainerAllocator> >::stream(s, indent + "  ", v.traj);
   }
 };
 

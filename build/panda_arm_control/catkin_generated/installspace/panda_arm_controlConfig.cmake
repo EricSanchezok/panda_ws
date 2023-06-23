@@ -116,7 +116,7 @@ if(NOT "include;/usr/include " STREQUAL " ")
   endforeach()
 endif()
 
-set(libraries "panda_arm_control;/usr/lib/libfranka.so.0.9.2")
+set(libraries "panda_arm_control;/usr/lib/libfranka.so.0.8.0")
 foreach(library ${libraries})
   # keep build configuration keywords, target names and absolute libraries as-is
   if("${library}" MATCHES "^(debug|optimized|general)$")

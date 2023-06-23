@@ -1,11 +1,11 @@
 moveit_setup_assistant_config:
   URDF:
     package: franka_description
-    relative_path: robots/panda/panda.urdf.xacro
-    xacro_args: hand:=true
+    relative_path: robots/panda_arm.urdf.xacro
+    xacro_args: gazebo:=true hand:=true arm_id:=panda xyz:='0 0 0' rpy:='0 0 0'
   SRDF:
-    relative_path: config/panda.srdf.xacro
+    relative_path: config/panda.srdf
   CONFIG:
-    author_name: MoveIt maintainer team
-    author_email: moveit_releasers@googlegroups.com
-    generated_timestamp: 1636310680
+    author_name: EricSanchez
+    author_email: niexiaohangeric@163.com
+    generated_timestamp: 1687500532

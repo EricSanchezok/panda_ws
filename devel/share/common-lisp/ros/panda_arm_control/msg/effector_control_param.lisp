@@ -51,7 +51,12 @@
     :reader w
     :initarg :w
     :type cl:float
-    :initform 0.0))
+    :initform 0.0)
+   (traj
+    :reader traj
+    :initarg :traj
+    :type trajectory_msgs-msg:JointTrajectory
+    :initform (cl:make-instance 'trajectory_msgs-msg:JointTrajectory)))
 )
 
 (cl:defclass effector_control_param (<effector_control_param>)
@@ -106,6 +111,11 @@
 (cl:defmethod w-val ((m <effector_control_param>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader panda_arm_control-msg:w-val is deprecated.  Use panda_arm_control-msg:w instead.")
   (w m))
+
+(cl:ensure-generic-function 'traj-val :lambda-list '(m))
+(cl:defmethod traj-val ((m <effector_control_param>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader panda_arm_control-msg:traj-val is deprecated.  Use panda_arm_control-msg:traj instead.")
+  (traj m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <effector_control_param>) ostream)
   "Serializes a message object of type '<effector_control_param>"
   (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'work_mode))))
@@ -155,6 +165,7 @@
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream))
+  (roslisp-msg-protocol:serialize (cl:slot-value msg 'traj) ostream)
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <effector_control_param>) istream)
   "Deserializes a message object of type '<effector_control_param>"
@@ -216,6 +227,7 @@
       (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
     (cl:setf (cl:slot-value msg 'w) (roslisp-utils:decode-single-float-bits bits)))
+  (roslisp-msg-protocol:deserialize (cl:slot-value msg 'traj) istream)
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<effector_control_param>)))
@@ -226,16 +238,16 @@
   "panda_arm_control/effector_control_param")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<effector_control_param>)))
   "Returns md5sum for a message object of type '<effector_control_param>"
-  "3d06e5bea688509f1828a02e984cfc20")
+  "5215bcd504493e63651b35034e0fe1c3")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'effector_control_param)))
   "Returns md5sum for a message object of type 'effector_control_param"
-  "3d06e5bea688509f1828a02e984cfc20")
+  "5215bcd504493e63651b35034e0fe1c3")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<effector_control_param>)))
   "Returns full string definition for message of type '<effector_control_param>"
-  (cl:format cl:nil "string work_mode~%string supplement~%float32 x0~%float32 y0~%float32 z0~%float32 x~%float32 y~%float32 z~%float32 w~%#moveit_msgs/RobotTrajectory path~%~%"))
+  (cl:format cl:nil "string work_mode~%string supplement~%float32 x0~%float32 y0~%float32 z0~%float32 x~%float32 y~%float32 z~%float32 w~%trajectory_msgs/JointTrajectory traj~%================================================================================~%MSG: trajectory_msgs/JointTrajectory~%Header header~%string[] joint_names~%JointTrajectoryPoint[] points~%~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%string frame_id~%~%================================================================================~%MSG: trajectory_msgs/JointTrajectoryPoint~%# Each trajectory point specifies either positions[, velocities[, accelerations]]~%# or positions[, effort] for the trajectory to be executed.~%# All specified values are in the same order as the joint names in JointTrajectory.msg~%~%float64[] positions~%float64[] velocities~%float64[] accelerations~%float64[] effort~%duration time_from_start~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'effector_control_param)))
   "Returns full string definition for message of type 'effector_control_param"
-  (cl:format cl:nil "string work_mode~%string supplement~%float32 x0~%float32 y0~%float32 z0~%float32 x~%float32 y~%float32 z~%float32 w~%#moveit_msgs/RobotTrajectory path~%~%"))
+  (cl:format cl:nil "string work_mode~%string supplement~%float32 x0~%float32 y0~%float32 z0~%float32 x~%float32 y~%float32 z~%float32 w~%trajectory_msgs/JointTrajectory traj~%================================================================================~%MSG: trajectory_msgs/JointTrajectory~%Header header~%string[] joint_names~%JointTrajectoryPoint[] points~%~%================================================================================~%MSG: std_msgs/Header~%# Standard metadata for higher-level stamped data types.~%# This is generally used to communicate timestamped data ~%# in a particular coordinate frame.~%# ~%# sequence ID: consecutively increasing ID ~%uint32 seq~%#Two-integer timestamp that is expressed as:~%# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')~%# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')~%# time-handling sugar is provided by the client library~%time stamp~%#Frame this data is associated with~%string frame_id~%~%================================================================================~%MSG: trajectory_msgs/JointTrajectoryPoint~%# Each trajectory point specifies either positions[, velocities[, accelerations]]~%# or positions[, effort] for the trajectory to be executed.~%# All specified values are in the same order as the joint names in JointTrajectory.msg~%~%float64[] positions~%float64[] velocities~%float64[] accelerations~%float64[] effort~%duration time_from_start~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <effector_control_param>))
   (cl:+ 0
      4 (cl:length (cl:slot-value msg 'work_mode))
@@ -247,6 +259,7 @@
      4
      4
      4
+     (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'traj))
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <effector_control_param>))
   "Converts a ROS message object to a list"
@@ -260,4 +273,5 @@
     (cl:cons ':y (y msg))
     (cl:cons ':z (z msg))
     (cl:cons ':w (w msg))
+    (cl:cons ':traj (traj msg))
 ))

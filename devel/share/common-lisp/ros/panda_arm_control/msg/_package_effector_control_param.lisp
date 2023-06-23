@@ -17,4 +17,6 @@
           Z
           W-VAL
           W
+          TRAJ-VAL
+          TRAJ
 ))

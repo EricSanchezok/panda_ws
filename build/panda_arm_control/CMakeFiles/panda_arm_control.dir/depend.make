@@ -13,6 +13,7 @@ panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_contro
 panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: /home/ericsanchez/ros/ros1/franka_ws/src/franka_ros/franka_hw/include/franka_hw/franka_state_interface.h
 panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: /home/ericsanchez/ros/ros1/franka_ws/src/franka_ros/franka_hw/include/franka_hw/model.h
 panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: /home/ericsanchez/ros/ros1/franka_ws/src/franka_ros/franka_hw/include/franka_hw/model_base.h
+panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: /home/ericsanchez/ros/ros1/panda_ws/devel/include/panda_arm_control/effector_control_param.h
 panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: /home/ericsanchez/ros/ros1/panda_ws/src/panda_arm_control/include/panda_arm_control/effector_cartesian_controller.h
 panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: /home/ericsanchez/ros/ros1/panda_ws/src/panda_arm_control/src/effector_cartesian_controller.cpp
 panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: /opt/ros/noetic/include/class_loader/class_loader.hpp
@@ -92,7 +93,9 @@ panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_contro
 panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: /opt/ros/noetic/include/ros/wall_timer.h
 panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: /opt/ros/noetic/include/ros/wall_timer_options.h
 panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: /opt/ros/noetic/include/rosconsole/macros_generated.h
+panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: /opt/ros/noetic/include/std_msgs/Header.h
+panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: /opt/ros/noetic/include/trajectory_msgs/JointTrajectory.h
+panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: /opt/ros/noetic/include/trajectory_msgs/JointTrajectoryPoint.h
 panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: /opt/ros/noetic/include/xmlrpcpp/XmlRpcDecl.h
 panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: /opt/ros/noetic/include/xmlrpcpp/XmlRpcValue.h
-panda_arm_control/CMakeFiles/panda_arm_control.dir/src/effector_cartesian_controller.cpp.o: devel/include/panda_arm_control/effector_control_param.h
 

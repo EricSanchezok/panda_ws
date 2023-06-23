@@ -11,6 +11,7 @@ const _deserializer = _ros_msg_utils.Deserialize;
 const _arrayDeserializer = _deserializer.Array;
 const _finder = _ros_msg_utils.Find;
 const _getByteLength = _ros_msg_utils.getByteLength;
+let trajectory_msgs = _finder('trajectory_msgs');
 
 //-----------------------------------------------------------
 
@@ -27,6 +28,7 @@ class effector_control_param {
       this.y = null;
       this.z = null;
       this.w = null;
+      this.traj = null;
     }
     else {
       if (initObj.hasOwnProperty('work_mode')) {
@@ -83,6 +85,12 @@ class effector_control_param {
       else {
         this.w = 0.0;
       }
+      if (initObj.hasOwnProperty('traj')) {
+        this.traj = initObj.traj
+      }
+      else {
+        this.traj = new trajectory_msgs.msg.JointTrajectory();
+      }
     }
   }
 
@@ -106,6 +114,8 @@ class effector_control_param {
     bufferOffset = _serializer.float32(obj.z, buffer, bufferOffset);
     // Serialize message field [w]
     bufferOffset = _serializer.float32(obj.w, buffer, bufferOffset);
+    // Serialize message field [traj]
+    bufferOffset = trajectory_msgs.msg.JointTrajectory.serialize(obj.traj, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -131,6 +141,8 @@ class effector_control_param {
     data.z = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [w]
     data.w = _deserializer.float32(buffer, bufferOffset);
+    // Deserialize message field [traj]
+    data.traj = trajectory_msgs.msg.JointTrajectory.deserialize(buffer, bufferOffset);
     return data;
   }
 
@@ -138,6 +150,7 @@ class effector_control_param {
     let length = 0;
     length += _getByteLength(object.work_mode);
     length += _getByteLength(object.supplement);
+    length += trajectory_msgs.msg.JointTrajectory.getMessageSize(object.traj);
     return length + 36;
   }
 
@@ -148,7 +161,7 @@ class effector_control_param {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '3d06e5bea688509f1828a02e984cfc20';
+    return '5215bcd504493e63651b35034e0fe1c3';
   }
 
   static messageDefinition() {
@@ -163,7 +176,41 @@ class effector_control_param {
     float32 y
     float32 z
     float32 w
-    #moveit_msgs/RobotTrajectory path
+    trajectory_msgs/JointTrajectory traj
+    ================================================================================
+    MSG: trajectory_msgs/JointTrajectory
+    Header header
+    string[] joint_names
+    JointTrajectoryPoint[] points
+    
+    ================================================================================
+    MSG: std_msgs/Header
+    # Standard metadata for higher-level stamped data types.
+    # This is generally used to communicate timestamped data 
+    # in a particular coordinate frame.
+    # 
+    # sequence ID: consecutively increasing ID 
+    uint32 seq
+    #Two-integer timestamp that is expressed as:
+    # * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
+    # * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
+    # time-handling sugar is provided by the client library
+    time stamp
+    #Frame this data is associated with
+    string frame_id
+    
+    ================================================================================
+    MSG: trajectory_msgs/JointTrajectoryPoint
+    # Each trajectory point specifies either positions[, velocities[, accelerations]]
+    # or positions[, effort] for the trajectory to be executed.
+    # All specified values are in the same order as the joint names in JointTrajectory.msg
+    
+    float64[] positions
+    float64[] velocities
+    float64[] accelerations
+    float64[] effort
+    duration time_from_start
+    
     `;
   }
 
@@ -234,6 +281,13 @@ class effector_control_param {
     }
     else {
       resolved.w = 0.0
+    }
+
+    if (msg.traj !== undefined) {
+      resolved.traj = trajectory_msgs.msg.JointTrajectory.Resolve(msg.traj)
+    }
+    else {
+      resolved.traj = new trajectory_msgs.msg.JointTrajectory()
     }
 
     return resolved;

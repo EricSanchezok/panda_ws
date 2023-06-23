@@ -10,11 +10,13 @@
 
 (in-package "ROS")
 ;;//! \htmlinclude effector_control_param.msg.html
+(if (not (find-package "TRAJECTORY_MSGS"))
+  (ros::roseus-add-msgs "trajectory_msgs"))
 
 
 (defclass panda_arm_control::effector_control_param
   :super ros::object
-  :slots (_work_mode _supplement _x0 _y0 _z0 _x _y _z _w ))
+  :slots (_work_mode _supplement _x0 _y0 _z0 _x _y _z _w _traj ))
 
 (defmethod panda_arm_control::effector_control_param
   (:init
@@ -28,6 +30,7 @@
     ((:y __y) 0.0)
     ((:z __z) 0.0)
     ((:w __w) 0.0)
+    ((:traj __traj) (instance trajectory_msgs::JointTrajectory :init))
     )
    (send-super :init)
    (setq _work_mode (string __work_mode))
@@ -39,6 +42,7 @@
    (setq _y (float __y))
    (setq _z (float __z))
    (setq _w (float __w))
+   (setq _traj __traj)
    self)
   (:work_mode
    (&optional __work_mode)
@@ -67,6 +71,13 @@
   (:w
    (&optional __w)
    (if __w (setq _w __w)) _w)
+  (:traj
+   (&rest __traj)
+   (if (keywordp (car __traj))
+       (send* _traj __traj)
+     (progn
+       (if __traj (setq _traj (car __traj)))
+       _traj)))
   (:serialization-length
    ()
    (+
@@ -88,6 +99,8 @@
     4
     ;; float32 _w
     4
+    ;; trajectory_msgs/JointTrajectory _traj
+    (send _traj :serialization-length)
     ))
   (:serialize
    (&optional strm)
@@ -111,6 +124,8 @@
        (sys::poke _z (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
      ;; float32 _w
        (sys::poke _w (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
+     ;; trajectory_msgs/JointTrajectory _traj
+       (send _traj :serialize s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
@@ -133,11 +148,13 @@
      (setq _z (sys::peek buf ptr- :float)) (incf ptr- 4)
    ;; float32 _w
      (setq _w (sys::peek buf ptr- :float)) (incf ptr- 4)
+   ;; trajectory_msgs/JointTrajectory _traj
+     (send _traj :deserialize buf ptr-) (incf ptr- (send _traj :serialization-length))
    ;;
    self)
   )
 
-(setf (get panda_arm_control::effector_control_param :md5sum-) "3d06e5bea688509f1828a02e984cfc20")
+(setf (get panda_arm_control::effector_control_param :md5sum-) "5215bcd504493e63651b35034e0fe1c3")
 (setf (get panda_arm_control::effector_control_param :datatype-) "panda_arm_control/effector_control_param")
 (setf (get panda_arm_control::effector_control_param :definition-)
       "string work_mode
@@ -149,11 +166,45 @@ float32 x
 float32 y
 float32 z
 float32 w
-#moveit_msgs/RobotTrajectory path
+trajectory_msgs/JointTrajectory traj
+================================================================================
+MSG: trajectory_msgs/JointTrajectory
+Header header
+string[] joint_names
+JointTrajectoryPoint[] points
+
+================================================================================
+MSG: std_msgs/Header
+# Standard metadata for higher-level stamped data types.
+# This is generally used to communicate timestamped data 
+# in a particular coordinate frame.
+# 
+# sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
+# * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+string frame_id
+
+================================================================================
+MSG: trajectory_msgs/JointTrajectoryPoint
+# Each trajectory point specifies either positions[, velocities[, accelerations]]
+# or positions[, effort] for the trajectory to be executed.
+# All specified values are in the same order as the joint names in JointTrajectory.msg
+
+float64[] positions
+float64[] velocities
+float64[] accelerations
+float64[] effort
+duration time_from_start
+
 ")
 
 
 
-(provide :panda_arm_control/effector_control_param "3d06e5bea688509f1828a02e984cfc20")
+(provide :panda_arm_control/effector_control_param "5215bcd504493e63651b35034e0fe1c3")
 
 
