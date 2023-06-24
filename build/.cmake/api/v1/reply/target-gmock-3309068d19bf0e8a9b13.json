@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "gtest/lib/libgmockd.so"
+			"path" : "gtest/lib/libgmock.so"
 		}
 	],
 	"backtrace" : 3,
@@ -52,12 +52,6 @@
 				"parent" : 0
 			},
 			{
-				"command" : 3,
-				"file" : 0,
-				"line" : 195,
-				"parent" : 2
-			},
-			{
 				"command" : 4,
 				"file" : 0,
 				"line" : 181,
@@ -77,14 +71,10 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -fPIC  "
+					"fragment" : "-fPIC  "
 				},
 				{
 					"fragment" : "-Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers"
-				},
-				{
-					"backtrace" : 5,
-					"fragment" : "-pthread"
 				},
 				{
 					"backtrace" : 4,
@@ -97,7 +87,7 @@
 			"defines" : 
 			[
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"define" : "GTEST_CREATE_SHARED_LIBRARY=1"
 				},
 				{
@@ -107,20 +97,20 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 7,
+					"backtrace" : 6,
 					"path" : "/usr/src/googletest/googlemock/include"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 6,
 					"path" : "/usr/src/googletest/googlemock"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 6,
 					"isSystem" : true,
 					"path" : "/usr/src/googletest/googletest/include"
 				},
 				{
-					"backtrace" : 7,
+					"backtrace" : 6,
 					"isSystem" : true,
 					"path" : "/usr/src/googletest/googletest"
 				}
@@ -154,18 +144,18 @@
 			},
 			{
 				"backtrace" : 4,
-				"fragment" : "../lib/libgtestd.so",
+				"fragment" : "../lib/libgtest.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "-pthread",
+				"fragment" : "-lpthread",
 				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
 	"name" : "gmock",
-	"nameOnDisk" : "libgmockd.so",
+	"nameOnDisk" : "libgmock.so",
 	"paths" : 
 	{
 		"build" : "gtest/googlemock",

@@ -137,142 +137,143 @@ def main():
 
     pub = rospy.Publisher("/effector_cartesian_controller/effector_control_param_node", effector_control_param, queue_size=20)
 
-    clt = rospy.ServiceProxy("control_service", control_srv)
+    # clt = rospy.ServiceProxy("control_service", control_srv)
 
-    clt.wait_for_service()
+    # clt.wait_for_service()
 
     # 定义循环时间
     rate = rospy.Rate(30)
 
 
-    while not rospy.is_shutdown():
 
-        if panda.if_init_ready_pose == False:
-            print("正在初始化机械臂")
+    # while not rospy.is_shutdown():
 
-            current_joints_value = panda.arm.get_current_joint_values()
-            target_joints_value = deepcopy(current_joints_value)
+    #     if panda.if_init_ready_pose == False:
+    #         print("正在初始化机械臂")
 
-            # 设置ready位置为目标位置
-            for i in range(1, 8):
-                target_joints_value[i-1] = panda.ready_joints_value["panda_joint" + str(i)]
+    #         current_joints_value = panda.arm.get_current_joint_values()
+    #         target_joints_value = deepcopy(current_joints_value)
 
-            panda.arm.set_joint_value_target(target_joints_value)
+    #         # 设置ready位置为目标位置
+    #         for i in range(1, 8):
+    #             target_joints_value[i-1] = panda.ready_joints_value["panda_joint" + str(i)]
 
-            traj = panda.arm.plan()
+    #         panda.arm.set_joint_value_target(target_joints_value)
 
-            joint_trajectory = get_joint_trajectory(traj[1])
+    #         traj = panda.arm.plan()
+
+    #         joint_trajectory = get_joint_trajectory(traj[1])
    
-            control_param = effector_control_param()
-            control_param.work_mode = 'trajectory'
-            control_param.traj = joint_trajectory
+    #         control_param = effector_control_param()
+    #         control_param.work_mode = 'trajectory'
+    #         control_param.traj = joint_trajectory
 
-            pub.publish(control_param)
+    #         pub.publish(control_param)
 
-            # 获取joint_trajectory的时间长度
-            trajectory_time = joint_trajectory.points[-1].time_from_start
-            rospy.sleep(trajectory_time)
+    #         # 获取joint_trajectory的时间长度
+    #         trajectory_time = joint_trajectory.points[-1].time_from_start
+    #         rospy.sleep(trajectory_time)
 
-            print("机械臂初始化完成")
-            num = control_srvRequest()
-            num.request_num = 1
-            panda.control_value = clt.call(num)
+    #         print("机械臂初始化完成")
+    #         num = control_srvRequest()
+    #         num.request_num = 1
+    #         panda.control_value = clt.call(num)
 
-            panda.if_init_ready_pose = True
+    #         panda.if_init_ready_pose = True
 
-        else:
+    #     else:
 
-            num = control_srvRequest()
-            num.request_num = panda.request_num
+    #         num = control_srvRequest()
+    #         num.request_num = panda.request_num
 
-            panda.last_task = panda.control_value.task
-            panda.control_value = clt.call(num)
+    #         panda.last_task = panda.control_value.task
+    #         panda.control_value = clt.call(num)
 
 
-            if panda.last_task != panda.control_value.task or is_zero(panda.control_value) == True:
-                panda.task_init = False
+    #         if panda.last_task != panda.control_value.task or is_zero(panda.control_value) == True:
+    #             panda.task_init = False
 
-            if panda.control_value.task == "position" and is_zero(panda.control_value) == False:
+    #         if panda.control_value.task == "position" and is_zero(panda.control_value) == False:
 
-                if panda.task_init == False:
-                    panda.task_start_pose = panda.arm.get_current_pose(panda.end_effector_link).pose
-                    panda.task_start_control_value = panda.control_value
-                    panda.task_init = True
-                    continue
+    #             if panda.task_init == False:
+    #                 panda.task_start_pose = panda.arm.get_current_pose(panda.end_effector_link).pose
+    #                 panda.task_start_control_value = panda.control_value
+    #                 panda.task_init = True
+    #                 continue
 
-                # 获取机械臂末端的当前位置作为运动初始位置
-                start_pose = panda.arm.get_current_pose(panda.end_effector_link).pose
+    #             # 获取机械臂末端的当前位置作为运动初始位置
+    #             start_pose = panda.arm.get_current_pose(panda.end_effector_link).pose
 
-                target_pose = geometry_msgs.msg.Pose()
-                target_pose.position.x = panda.task_start_pose.position.x + (panda.control_value.vector0 - panda.task_start_control_value.vector0) * panda.move_coff
-                target_pose.position.y = panda.task_start_pose.position.y + (panda.control_value.vector1 - panda.task_start_control_value.vector1) * panda.move_coff
-                target_pose.position.z = panda.task_start_pose.position.z + (panda.control_value.vector2 - panda.task_start_control_value.vector2) * panda.move_coff
+    #             target_pose = geometry_msgs.msg.Pose()
+    #             target_pose.position.x = panda.task_start_pose.position.x + (panda.control_value.vector0 - panda.task_start_control_value.vector0) * panda.move_coff
+    #             target_pose.position.y = panda.task_start_pose.position.y + (panda.control_value.vector1 - panda.task_start_control_value.vector1) * panda.move_coff
+    #             target_pose.position.z = panda.task_start_pose.position.z + (panda.control_value.vector2 - panda.task_start_control_value.vector2) * panda.move_coff
                 
-                # 计算本次移动距离
-                distance = math.sqrt(
-                                    (target_pose.position.x - start_pose.position.x) * (target_pose.position.x - start_pose.position.x) +
-                                    (target_pose.position.y - start_pose.position.y) * (target_pose.position.y - start_pose.position.y) +
-                                    (target_pose.position.z - start_pose.position.z) * (target_pose.position.z - start_pose.position.z))
+    #             # 计算本次移动距离
+    #             distance = math.sqrt(
+    #                                 (target_pose.position.x - start_pose.position.x) * (target_pose.position.x - start_pose.position.x) +
+    #                                 (target_pose.position.y - start_pose.position.y) * (target_pose.position.y - start_pose.position.y) +
+    #                                 (target_pose.position.z - start_pose.position.z) * (target_pose.position.z - start_pose.position.z))
                 
-                if distance < 0.001:
-                    continue
+    #             if distance < 0.001:
+    #                 continue
 
-                time_start = tm.time()
+    #             time_start = tm.time()
 
-                target_pose.orientation = start_pose.orientation
+    #             target_pose.orientation = start_pose.orientation
 
-                waypoints = []
-                waypoints.append(deepcopy(start_pose))
-                waypoints.append(deepcopy(target_pose))
+    #             waypoints = []
+    #             waypoints.append(deepcopy(start_pose))
+    #             waypoints.append(deepcopy(target_pose))
 
-                fraction = 0.0   #路径规划覆盖率
-                maxtries = 100   #最大尝试规划次数
-                attempts = 0     #已经尝试规划次数
+    #             fraction = 0.0   #路径规划覆盖率
+    #             maxtries = 100   #最大尝试规划次数
+    #             attempts = 0     #已经尝试规划次数
                 
-                # 设置机器臂当前的状态作为运动初始状态
-                panda.arm.set_start_state_to_current_state()
-                # 设置执行时间限制为1秒
-                panda.arm.set_planning_time(0.1)
+    #             # 设置机器臂当前的状态作为运动初始状态
+    #             panda.arm.set_start_state_to_current_state()
+    #             # 设置执行时间限制为1秒
+    #             panda.arm.set_planning_time(0.1)
             
-                # 尝试规划一条笛卡尔空间下的路径，依次通过所有路点
-                while fraction < 1.0 and attempts < maxtries:
-                    (plan, fraction) = panda.arm.compute_cartesian_path (
-                                    waypoints,   # waypoint poses，路点列表
-                                    0.0001,        # eef_step，终端步进值
-                                    0.0,         # jump_threshold，跳跃阈值
-                                    True)        # avoid_collisions，避障规划
+    #             # 尝试规划一条笛卡尔空间下的路径，依次通过所有路点
+    #             while fraction < 1.0 and attempts < maxtries:
+    #                 (plan, fraction) = panda.arm.compute_cartesian_path (
+    #                                 waypoints,   # waypoint poses，路点列表
+    #                                 0.0001,        # eef_step，终端步进值
+    #                                 0.0,         # jump_threshold，跳跃阈值
+    #                                 True)        # avoid_collisions，避障规划
                     
-                    # 尝试次数累加
-                    attempts += 1
+    #                 # 尝试次数累加
+    #                 attempts += 1
 
-                time_middle = tm.time()
+    #             time_middle = tm.time()
                                 
-                # 如果路径规划成功（覆盖率100%）,则开始控制机械臂运动
-                if fraction == 1.0:
+    #             # 如果路径规划成功（覆盖率100%）,则开始控制机械臂运动
+    #             if fraction == 1.0:
 
-                    joint_trajectory = get_joint_trajectory(plan)
+    #                 joint_trajectory = get_joint_trajectory(plan)
         
-                    control_param = effector_control_param()
-                    control_param.work_mode = 'trajectory'
-                    control_param.traj = joint_trajectory
+    #                 control_param = effector_control_param()
+    #                 control_param.work_mode = 'trajectory'
+    #                 control_param.traj = joint_trajectory
 
-                    pub.publish(control_param)
+    #                 pub.publish(control_param)
 
-                    # 获取joint_trajectory的时间长度
-                    time = joint_trajectory.points[-1].time_from_start
-                    rospy.sleep(time)
+    #                 # 获取joint_trajectory的时间长度
+    #                 time = joint_trajectory.points[-1].time_from_start
+    #                 rospy.sleep(time)
 
-                # 如果路径规划失败，则打印失败信息
-                else:
-                    rospy.loginfo("Path planning failed with only " + str(fraction) + " success after " + str(maxtries) + " attempts.")  
+    #             # 如果路径规划失败，则打印失败信息
+    #             else:
+    #                 rospy.loginfo("Path planning failed with only " + str(fraction) + " success after " + str(maxtries) + " attempts.")  
 
-                time_end = tm.time()
-                print("time_middle: ", time_middle - time_start, "time_end: ", time_end - time_start)
+    #             time_end = tm.time()
+    #             print("time_middle: ", time_middle - time_start, "time_end: ", time_end - time_start)
 
-            if panda.control_value.task == "return":
-                panda.if_init_ready_pose = False
+    #         if panda.control_value.task == "return":
+    #             panda.if_init_ready_pose = False
 
-        rate.sleep()
+    #     rate.sleep()
 
 if __name__ == '__main__':
     try:
